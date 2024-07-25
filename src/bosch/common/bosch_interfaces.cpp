@@ -29,8 +29,11 @@
  */
 #include "bosch_interfaces.h"
 
+<<<<<<< HEAD
 #if defined(ARDUINO)
 
+=======
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
 #if defined(ARDUINO_ARCH_RP2040)
 SPISettings  SensorInterfaces::__spiSetting = SPISettings();
 #else
@@ -157,5 +160,8 @@ void SensorInterfaces::bhy2_delay_us(uint32_t us, void *private_data)
     (void)private_data;
     delayMicroseconds(us);
 }
+<<<<<<< HEAD
 
 #endif /*Arduino */
+=======
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)

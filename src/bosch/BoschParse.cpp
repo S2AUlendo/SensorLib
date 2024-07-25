@@ -56,7 +56,11 @@ void BoschParse::parseData(const struct bhy2_fifo_parse_data_info *fifo, void *u
         if (entry.cb ) {
             if (entry.id == fifo->sensor_id) {
                 if (entry.cb) {
+<<<<<<< HEAD
                     entry.cb(fifo->sensor_id, fifo->data_ptr, size, fifo->time_stamp);
+=======
+                    entry.cb(fifo->sensor_id, fifo->data_ptr, size);
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
                 }
             }
         }
@@ -75,7 +79,10 @@ void BoschParse::parseMetaEvent(const struct bhy2_fifo_parse_data_info *callback
     (void)byte1;
     (void)byte2;
     (void)event_text;
+<<<<<<< HEAD
     uint8_t *accuracy = (uint8_t *)user_data;
+=======
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
 
     if (callback_info->sensor_id == BHY2_SYS_ID_META_EVENT) {
         event_text = "[META EVENT]";
@@ -87,6 +94,7 @@ void BoschParse::parseMetaEvent(const struct bhy2_fifo_parse_data_info *callback
 
     switch (meta_event_type) {
     case BHY2_META_EVENT_FLUSH_COMPLETE:
+<<<<<<< HEAD
         log_i("%s Flush complete for sensor id %u", event_text, byte1);
         break;
     case BHY2_META_EVENT_SAMPLE_RATE_CHANGED:
@@ -136,11 +144,63 @@ void BoschParse::parseMetaEvent(const struct bhy2_fifo_parse_data_info *callback
         break;
     case BHY2_META_EVENT_RESET:
         log_i("%s Reset event", event_text);
+=======
+        log_i("%s Flush complete for sensor id %u\r\n", event_text, byte1);
+        break;
+    case BHY2_META_EVENT_SAMPLE_RATE_CHANGED:
+        log_i("%s Sample rate changed for sensor id %u\r\n", event_text, byte1);
+        break;
+    case BHY2_META_EVENT_POWER_MODE_CHANGED:
+        log_i("%s Power mode changed for sensor id %u\r\n", event_text, byte1);
+        break;
+    case BHY2_META_EVENT_ALGORITHM_EVENTS:
+        log_i("%s Algorithm event\r\n", event_text);
+        break;
+    case BHY2_META_EVENT_SENSOR_STATUS:
+        log_i("%s Accuracy for sensor id %u changed to %u\r\n", event_text, byte1, byte2);
+        break;
+    case BHY2_META_EVENT_BSX_DO_STEPS_MAIN:
+        log_i("%s BSX event (do steps main)\r\n", event_text);
+        break;
+    case BHY2_META_EVENT_BSX_DO_STEPS_CALIB:
+        log_i("%s BSX event (do steps calib)\r\n", event_text);
+        break;
+    case BHY2_META_EVENT_BSX_GET_OUTPUT_SIGNAL:
+        log_i("%s BSX event (get output signal)\r\n", event_text);
+        break;
+    case BHY2_META_EVENT_SENSOR_ERROR:
+        log_i("%s Sensor id %u reported error 0x%02X\r\n", event_text, byte1, byte2);
+        break;
+    case BHY2_META_EVENT_FIFO_OVERFLOW:
+        log_i("%s FIFO overflow\r\n", event_text);
+        break;
+    case BHY2_META_EVENT_DYNAMIC_RANGE_CHANGED:
+        log_i("%s Dynamic range changed for sensor id %u\r\n", event_text, byte1);
+        break;
+    case BHY2_META_EVENT_FIFO_WATERMARK:
+        log_i("%s FIFO watermark reached\r\n", event_text);
+        break;
+    case BHY2_META_EVENT_INITIALIZED:
+        log_i("%s Firmware initialized. Firmware version %u\r\n", event_text, ((uint16_t)byte2 << 8) | byte1);
+        break;
+    case BHY2_META_TRANSFER_CAUSE:
+        log_i("%s Transfer cause for sensor id %u\r\n", event_text, byte1);
+        break;
+    case BHY2_META_EVENT_SENSOR_FRAMEWORK:
+        log_i("%s Sensor framework event for sensor id %u\r\n", event_text, byte1);
+        break;
+    case BHY2_META_EVENT_RESET:
+        log_i("%s Reset event\r\n", event_text);
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
         break;
     case BHY2_META_EVENT_SPACER:
         return;
     default:
+<<<<<<< HEAD
         log_i("%s Unknown meta event with id: %u", event_text, meta_event_type);
+=======
+        log_i("%s Unknown meta event with id: %u\r\n", event_text, meta_event_type);
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
         break;
     }
 
@@ -165,7 +225,11 @@ void BoschParse::parseDebugMessage(const struct bhy2_fifo_parse_data_info *callb
     uint8_t debug_msg[17] = { 0 }; /* Max payload size is 16 bytes, adds a trailing zero if the payload is full */
 
     if (!callback_info) {
+<<<<<<< HEAD
         log_i("Null reference");
+=======
+        log_i("Null reference\r\n");
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
 
         return;
     }
@@ -177,5 +241,9 @@ void BoschParse::parseDebugMessage(const struct bhy2_fifo_parse_data_info *callb
     memcpy(debug_msg, &callback_info->data_ptr[1], msg_length);
     debug_msg[msg_length] = '\0'; /* Terminate the string */
 
+<<<<<<< HEAD
     log_i("[DEBUG MSG]; T: %lu.%09lu; %s", s, ns, debug_msg);
+=======
+    log_i("[DEBUG MSG]; T: %lu.%09lu; %s\r\n", s, ns, debug_msg);
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
 }

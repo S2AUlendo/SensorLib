@@ -25,7 +25,11 @@
  * @file      BHI260AP_Orientation.ino
  * @author    Lewis He (lewishe@outlook.com)
  * @date      2023-10-07
+<<<<<<< HEAD
  * @note      Changed from Boschsensortec API https://github.com/boschsensortec/BHY2_SensorAPI
+=======
+ *
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
  */
 #include <Wire.h>
 #include <SPI.h>
@@ -46,7 +50,11 @@
 #define BHI260AP_RST          47
 #endif
 
+<<<<<<< HEAD
 void orientation_process_callback(uint8_t sensor_id, uint8_t *data_ptr, uint32_t len, uint64_t *timestamp);
+=======
+void orientation_process_callback(uint8_t sensor_id, uint8_t *data_ptr, uint32_t len);
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
 
 SensorBHI260AP bhy;
 
@@ -106,7 +114,11 @@ void loop()
 }
 
 
+<<<<<<< HEAD
 void orientation_process_callback(uint8_t  sensor_id, uint8_t *data_ptr, uint32_t len, uint64_t *timestamp)
+=======
+void orientation_process_callback(uint8_t  sensor_id, uint8_t *data_ptr, uint32_t len)
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
 {
     char report[256];
     uint8_t direction = *data_ptr;

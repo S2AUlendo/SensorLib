@@ -93,7 +93,11 @@ public:
     };
 
 #if defined(ARDUINO)
+<<<<<<< HEAD
     SensorQMC6310(PLATFORM_WIRE_TYPE &w, int sda = DEFAULT_SDA, int scl = DEFAULT_SCL, uint8_t addr = QMC6310_SLAVE_ADDRESS)
+=======
+    SensorQMC6310(PLATFORM_WIRE_TYPE &w, int sda = SDA, int scl = SCL, uint8_t addr = QMC6310_SLAVE_ADDRESS)
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
     {
         __wire = &w;
         __sda = sda;
@@ -106,8 +110,13 @@ public:
     {
 #if defined(ARDUINO)
         __wire = &Wire;
+<<<<<<< HEAD
         __sda = DEFAULT_SDA;
         __scl = DEFAULT_SCL;
+=======
+        __sda = SDA;
+        __scl = SCL;
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
 #endif
         __addr = QMC6310_SLAVE_ADDRESS;
     }

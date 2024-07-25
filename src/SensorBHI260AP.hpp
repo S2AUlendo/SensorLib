@@ -30,14 +30,21 @@
  */
 #pragma once
 
+<<<<<<< HEAD
 #if defined(ARDUINO)
 
+=======
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
 #include "bosch/BoschParse.h"
 #include "bosch/SensorBhy2Define.h"
 #include "bosch/firmware/BHI260AP.fw.h"
 
 
 
+<<<<<<< HEAD
+=======
+#if defined(ARDUINO)
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
 
 class SensorBHI260AP
 {
@@ -111,10 +118,17 @@ public:
 
     void deinit()
     {
+<<<<<<< HEAD
         if (__pro_buf) {
             free(__pro_buf);
         }
         __pro_buf = NULL;
+=======
+        if (processBuffer) {
+            free(processBuffer);
+        }
+        processBuffer = NULL;
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
 
         if (bhy2) {
             free(bhy2);
@@ -141,11 +155,16 @@ public:
 
     void update()
     {
+<<<<<<< HEAD
         if (!__pro_buf) {
+=======
+        if (!processBuffer) {
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
             return;
         }
         if (__handler.irq != SENSOR_PIN_NONE) {
             if (__data_available) {
+<<<<<<< HEAD
                 bhy2_get_and_process_fifo(__pro_buf, __pro_buf_size, bhy2);
             }
         } else {
@@ -158,6 +177,15 @@ public:
         __boot_from_flash = boot_from_flash;
     }
 
+=======
+                bhy2_get_and_process_fifo(processBuffer, processBufferSize, bhy2);
+            }
+        } else {
+            bhy2_get_and_process_fifo(processBuffer, processBufferSize, bhy2);
+        }
+    }
+
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
     bool enablePowerSave()
     {
         return true;
@@ -239,6 +267,7 @@ public:
         __error_code = (bhy2_get_feature_status(&feat_status, bhy2));
         BHY2_RLST_CHECK(__error_code != BHY2_OK, "bhy2_get_feature_status failed!", false);
 
+<<<<<<< HEAD
         stream.printf("Product ID     : %02x\n", product_id);
         stream.printf("Kernel version : %04u\n", kernel_version);
         stream.printf("User version   : %04u\n", user_version);
@@ -246,12 +275,25 @@ public:
         stream.printf("Power state    : %s\n", (host_status & BHY2_HST_POWER_STATE) ? "sleeping" : "active");
         stream.printf("Host interface : %s\n", (host_status & BHY2_HST_HOST_PROTOCOL) ? "SPI" : "I2C");
         stream.printf("Feature status : 0x%02x\n", feat_status);
+=======
+        stream.printf("Product ID     : %02x\r\n", product_id);
+        stream.printf("Kernel version : %04u\r\n", kernel_version);
+        stream.printf("User version   : %04u\r\n", user_version);
+        stream.printf("ROM version    : %04u\r\n", rom_version);
+        stream.printf("Power state    : %s\r\n", (host_status & BHY2_HST_POWER_STATE) ? "sleeping" : "active");
+        stream.printf("Host interface : %s\r\n", (host_status & BHY2_HST_HOST_PROTOCOL) ? "SPI" : "I2C");
+        stream.printf("Feature status : 0x%02x\r\n", feat_status);
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
 
         /* Read boot status */
         __error_code = (bhy2_get_boot_status(&boot_status, bhy2));
         BHY2_RLST_CHECK(__error_code != BHY2_OK, "bhy2_get_boot_status failed!", false);
 
+<<<<<<< HEAD
         stream.printf("Boot Status : 0x%02x: ", boot_status);
+=======
+        stream.printf("Boot Status : 0x%02x: \r\n", boot_status);
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
 
         if (boot_status & BHY2_BST_FLASH_DETECTED) {
             stream.println("\tFlash detected. ");
@@ -289,7 +331,11 @@ public:
         __error_code = (bhy2_get_error_value(&sensor_error, bhy2));
         BHY2_RLST_CHECK(__error_code != BHY2_OK, "bhy2_get_error_value failed!", false);
         if (sensor_error) {
+<<<<<<< HEAD
             log_e("%s", get_sensor_error_text(sensor_error));
+=======
+            log_e("%s\r\n", get_sensor_error_text(sensor_error));
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
         }
 
 
@@ -365,7 +411,11 @@ public:
         if (__error_code != BHY2_OK) {
             return false;
         }
+<<<<<<< HEAD
         return (boot_status & BHY2_BST_HOST_INTERFACE_READY);
+=======
+        return (boot_status & BHY2_BST_HOST_INTERFACE_READY) == false;
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
     }
 
     uint16_t getKernelVersion()
@@ -375,7 +425,11 @@ public:
         if ((__error_code != BHY2_OK) && (version == 0)) {
             return 0;
         }
+<<<<<<< HEAD
         log_d("Boot successful. Kernel version %u.", version);
+=======
+        log_i("Boot successful. Kernel version %u.\r\n", version);
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
         return version;
     }
 
@@ -426,7 +480,11 @@ public:
 
     void setProcessBufferSize(uint32_t size)
     {
+<<<<<<< HEAD
         __pro_buf_size = size;
+=======
+        processBufferSize = size;
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
     }
 
 
@@ -444,6 +502,7 @@ public:
             if (boot_status & BHY2_BST_FLASH_DETECTED) {
                 uint32_t start_addr = BHY2_FLASH_SECTOR_START_ADDR;
                 uint32_t end_addr = start_addr + length;
+<<<<<<< HEAD
                 log_i("Flash detected. Erasing flash to upload firmware");
                 __error_code = bhy2_erase_flash(start_addr, end_addr, bhy2);
                 BHY2_RLST_CHECK(__error_code != BHY2_OK, "bhy2_erase_flash failed!", false);
@@ -456,16 +515,35 @@ public:
             BHY2_RLST_CHECK(__error_code != BHY2_OK, "bhy2_upload_firmware_to_flash failed!", false);
         } else {
             log_i("Loading firmware into RAM.");
+=======
+                log_i("Flash detected. Erasing flash to upload firmware\r\n");
+                __error_code = bhy2_erase_flash(start_addr, end_addr, bhy2);
+                BHY2_RLST_CHECK(__error_code != BHY2_OK, "bhy2_erase_flash failed!", false);
+            } else {
+                log_e("Flash not detected\r\n");
+                return false;
+            }
+            printf("Loading firmware into FLASH.\r\n");
+            __error_code = bhy2_upload_firmware_to_flash(firmware, length, bhy2);
+            BHY2_RLST_CHECK(__error_code != BHY2_OK, "bhy2_upload_firmware_to_flash failed!", false);
+        } else {
+            log_i("Loading firmware into RAM.\r\n");
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
             log_i("upload size = %lu", length);
             __error_code = bhy2_upload_firmware_to_ram(firmware, length, bhy2);
             BHY2_RLST_CHECK(__error_code != BHY2_OK, "bhy2_upload_firmware_to_ram failed!", false);
         }
 
+<<<<<<< HEAD
         log_i("Loading firmware into RAM Done");
+=======
+        log_i("Loading firmware into RAM Done\r\n");
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
         __error_code = bhy2_get_error_value(&sensor_error, bhy2);
         BHY2_RLST_CHECK(__error_code != BHY2_OK, "bhy2_get_error_value failed!", false);
         if (sensor_error != BHY2_OK) {
             __error_code = bhy2_get_error_value(&sensor_error, bhy2);
+<<<<<<< HEAD
             log_e("%s", get_sensor_error_text(sensor_error));
             return false;
         }
@@ -476,13 +554,29 @@ public:
             __error_code = bhy2_boot_from_flash(bhy2);
         } else {
             log_i("Booting from RAM.");
+=======
+            log_e("%s\r\n", get_sensor_error_text(sensor_error));
+            return false;
+        }
+
+
+        if (write2Flash) {
+            log_i("Booting from FLASH.\r\n");
+            __error_code = bhy2_boot_from_flash(bhy2);
+        } else {
+            log_i("Booting from RAM.\r\n");
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
             __error_code = bhy2_boot_from_ram(bhy2);
         }
         BHY2_RLST_CHECK(__error_code != BHY2_OK, "bhy2 boot failed!", false);
 
         __error_code = bhy2_get_error_value(&sensor_error, bhy2);
         if (sensor_error) {
+<<<<<<< HEAD
             log_e("%s", get_sensor_error_text(sensor_error));
+=======
+            log_e("%s\r\n", get_sensor_error_text(sensor_error));
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
             return false;
         }
         return sensor_error == BHY2_OK;
@@ -497,12 +591,18 @@ public:
 
     bool configure(uint8_t sensor_id, float sample_rate, uint32_t report_latency_ms)
     {
+<<<<<<< HEAD
         if (!bhy2_is_sensor_available(sensor_id, bhy2)) {
             log_e("Sensor not present"); return false;
         }
         __error_code = bhy2_set_virt_sensor_cfg(sensor_id, sample_rate, report_latency_ms, bhy2);
         BHY2_RLST_CHECK(__error_code != BHY2_OK, "bhy2_set_virt_sensor_cfg failed!", false);
         log_i("Enable %s at %.2fHz.", get_sensor_name(sensor_id), sample_rate);
+=======
+        __error_code = bhy2_set_virt_sensor_cfg(sensor_id, sample_rate, report_latency_ms, bhy2);
+        BHY2_RLST_CHECK(__error_code != BHY2_OK, "bhy2_set_virt_sensor_cfg failed!", false);
+        log_i("Enable %s at %.2fHz.\r\n", get_sensor_name(sensor_id), sample_rate);
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
         return true;
     }
 
@@ -531,6 +631,7 @@ public:
         return get_sensor_name(sensor_id);
     }
 
+<<<<<<< HEAD
     // Get an accuracy report
     uint8_t getAccuracy()
     {
@@ -642,6 +743,9 @@ private:
         }
     }
 
+=======
+private:
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
     static void handleISR()
     {
         __data_available = true;
@@ -703,6 +807,11 @@ private:
             return false;
         }
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
         __error_code = bhy2_soft_reset(bhy2);
         BHY2_RLST_CHECK(__error_code != BHY2_OK, "reset bhy2 failed!", false);
 
@@ -712,10 +821,17 @@ private:
 
         /* Check for a valid product ID */
         if (product_id != BHY2_PRODUCT_ID) {
+<<<<<<< HEAD
             log_e("Product ID read %X. Expected %X", product_id, BHY2_PRODUCT_ID);
             return false;
         } else {
             log_i("BHI260/BHA260 found. Product ID read %X", product_id);
+=======
+            log_e("Product ID read %X. Expected %X\r\n", product_id, BHY2_PRODUCT_ID);
+            return false;
+        } else {
+            log_i("BHI260/BHA260 found. Product ID read %X\r\n", product_id);
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
         }
 
         if (!__firmware) {
@@ -723,6 +839,7 @@ private:
             setFirmware(bhy2_firmware_image, sizeof(bhy2_firmware_image), false);
         }
 
+<<<<<<< HEAD
         if (__boot_from_flash) {
             if (!bootFromFlash()) {
                 //** If the boot from flash fails, re-upload the firmware to flash
@@ -736,6 +853,9 @@ private:
             }
         } else {
             // ** Upload firmware to RAM
+=======
+        if (!isReady()) {
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
             if (!uploadFirmware(__firmware, __firmware_size, __write_flash)) {
                 log_e("uploadFirmware failed!");
                 return false;
@@ -744,6 +864,7 @@ private:
 
         uint16_t version = getKernelVersion();
         BHY2_RLST_CHECK(!version, "getKernelVersion failed!", false);
+<<<<<<< HEAD
         log_i("Boot successful. Kernel version %u.", version);
 
         //Set event callback
@@ -751,12 +872,22 @@ private:
         BHY2_RLST_CHECK(__error_code != BHY2_OK, "bhy2_register_fifo_parse_callback failed!", false);
 
         __error_code = bhy2_register_fifo_parse_callback(BHY2_SYS_ID_META_EVENT_WU, BoschParse::parseMetaEvent, (void *)&__accuracy, bhy2);
+=======
+        log_i("Boot successful. Kernel version %u.\r\n", version);
+
+        //Set event callback
+        __error_code = bhy2_register_fifo_parse_callback(BHY2_SYS_ID_META_EVENT, BoschParse::parseMetaEvent, NULL, bhy2);
+        BHY2_RLST_CHECK(__error_code != BHY2_OK, "bhy2_register_fifo_parse_callback failed!", false);
+
+        __error_code = bhy2_register_fifo_parse_callback(BHY2_SYS_ID_META_EVENT_WU, BoschParse::parseMetaEvent, NULL, bhy2);
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
         BHY2_RLST_CHECK(__error_code != BHY2_OK, "bhy2_register_fifo_parse_callback failed!", false);
 
         // __error_code = bhy2_register_fifo_parse_callback(BHY2_SYS_ID_DEBUG_MSG, BoschParse::parseDebugMessage, NULL, bhy2);
         // BHY2_RLST_CHECK(__error_code != BHY2_OK, "bhy2_register_fifo_parse_callback parseDebugMessage failed!", false);
 
         //Set process buffer
+<<<<<<< HEAD
 #if     (defined(ESP32) || defined(ARDUINO_ARCH_ESP32)) && defined(BOARD_HAS_PSRAM)
         __pro_buf = (uint8_t *)ps_malloc(__pro_buf_size);
 #else
@@ -768,6 +899,19 @@ private:
         if (__error_code != BHY2_OK) {
             log_e("bhy2_get_and_process_fifo failed");
             free(__pro_buf);
+=======
+#if     defined(ESP32) && defined(BOARD_HAS_PSRAM)
+        processBuffer = (uint8_t *)ps_malloc(processBufferSize);
+#else
+        processBuffer = (uint8_t *)malloc(processBufferSize);
+#endif
+        BHY2_RLST_CHECK(!processBuffer, "process buffer malloc failed!", false);
+
+        __error_code = bhy2_get_and_process_fifo(processBuffer, processBufferSize, bhy2);
+        if (__error_code != BHY2_OK) {
+            log_e("bhy2_get_and_process_fifo failed");
+            free(processBuffer);
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
             return false;
         }
 
@@ -787,10 +931,17 @@ private:
         if (__handler.irq != SENSOR_PIN_NONE) {
 #if defined(ARDUINO_ARCH_RP2040)
             attachInterrupt((pin_size_t)(__handler.irq), handleISR, (PinStatus )RISING);
+<<<<<<< HEAD
 #elif defined(NRF52840_XXAA) || defined(NRF52832_XXAA) || defined(ESP32) || defined(ARDUINO_ARCH_ESP32)
             attachInterrupt(__handler.irq, handleISR, RISING);
 #else
 #error "Interrupt registration not implemented"
+=======
+#elif defined(NRF52840_XXAA) || defined(NRF52832_XXAA) || defined(ESP32)
+            attachInterrupt(__handler.irq, handleISR, RISING);
+#else
+#error "No support ."
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
 #endif
         }
 
@@ -802,6 +953,7 @@ protected:
     SensorLibConfigure __handler;
     int8_t           __error_code;
     static volatile bool __data_available;
+<<<<<<< HEAD
     uint8_t          *__pro_buf = NULL;
     size_t           __pro_buf_size = BHY_PROCESS_BUFFER_SIZE;
     const uint8_t    *__firmware;
@@ -812,6 +964,17 @@ protected:
     uint8_t         __accuracy;      /* Accuracy is reported as a meta event. */
 };
 
+=======
+    uint8_t          *processBuffer = NULL;
+    size_t           processBufferSize = BHY_PROCESS_BUFFER_SZIE;
+    const uint8_t    *__firmware;
+    size_t          __firmware_size;
+    bool            __write_flash;
+    uint16_t        __max_rw_length;
+};
+
+volatile bool SensorBHI260AP::__data_available;
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
 
 #endif /*defined(ARDUINO)*/
 

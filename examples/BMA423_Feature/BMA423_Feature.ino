@@ -109,6 +109,10 @@ void setup()
 
 void loop()
 {
+<<<<<<< HEAD
+=======
+    int16_t x, y, z;
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
     if (sensorIRQ) {
         sensorIRQ = false;
         // The interrupt status must be read after an interrupt is detected
@@ -117,8 +121,12 @@ void loop()
 
         if (accel.isPedometer()) {
             uint32_t stepCounter = accel.getPedometerCounter();
+<<<<<<< HEAD
             Serial.print("Step count interrupt,step Counter:");
             Serial.println(stepCounter);
+=======
+            Serial.printf("Step count interrupt,step Counter:%u\n", stepCounter);
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
         }
         if (accel.isActivity()) {
             Serial.println("Activity interrupt");

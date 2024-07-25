@@ -31,8 +31,12 @@
 #include <SPI.h>
 #include <Arduino.h>
 
+<<<<<<< HEAD
 #if defined(ARDUINO_ARCH_ESP32)
 
+=======
+#ifndef ARDUINO_ARCH_RP2040
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
 #include "SensorQMC6310.hpp"
 #include "SH1106Wire.h"         //Oled display from https://github.com/ThingPulse/esp8266-oled-ssd1306
 
@@ -230,6 +234,10 @@ void setup()
 
 void loop()
 {
+<<<<<<< HEAD
     Serial.println("The graphics library may not be supported on the current platform"); delay(1000);
+=======
+    Serial.println("display lib not support RP2040"); delay(1000);
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
 }
 #endif

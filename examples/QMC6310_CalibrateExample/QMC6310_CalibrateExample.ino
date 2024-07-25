@@ -117,6 +117,7 @@ void calibrate()
     y_offset = (y_max + y_min) / 2;
     z_offset = (z_max + z_min) / 2;
 
+<<<<<<< HEAD
     Serial.print("x_min:");
     Serial.print(x_min);
 
@@ -149,6 +150,10 @@ void calibrate()
 
     // Serial.printf("x_min:%d x_max:%d y_min:%d y_max:%d z_min:%d z_max:%d\n", x_min, x_max, y_min, y_max, z_min, z_max);
     // Serial.printf("x_offset:%.2f y_offset:%.2f z_offset:%.2f \n", x_offset, y_offset, z_offset);
+=======
+    Serial.printf("x_min:%d x_max:%d y_min:%d y_max:%d z_min:%d z_max:%d\n", x_min, x_max, y_min, y_max, z_min, z_max);
+    Serial.printf("x_offset:%.2f y_offset:%.2f z_offset:%.2f \n", x_offset, y_offset, z_offset);
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
 
     // Set the calibration value and the user calculates the deviation
     qmc.setOffset(x_offset, y_offset, z_offset);
@@ -160,6 +165,11 @@ void setup()
     Serial.begin(115200);
     while (!Serial);
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
     if (!qmc.begin(Wire, QMC6310_SLAVE_ADDRESS, SENSOR_SDA, SENSOR_SCL)) {
         Serial.println("Failed to find QMC6310 - check your wiring!");
         while (1) {
@@ -231,7 +241,11 @@ void setup()
 void loop()
 {
 
+<<<<<<< HEAD
     //Wait data ready
+=======
+    //Wiat data ready
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
     if (qmc.isDataReady()) {
 
         qmc.readData();

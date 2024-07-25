@@ -30,7 +30,10 @@
 #include <Wire.h>
 #include <SPI.h>
 #include <Arduino.h>
+<<<<<<< HEAD
 #if defined(ARDUINO_ARCH_ESP32)
+=======
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
 #include <time.h>
 #include <WiFi.h>
 #include <sntp.h>
@@ -146,6 +149,7 @@ void loop()
 
     }
 }
+<<<<<<< HEAD
 #else
 void setup()
 {
@@ -157,5 +161,8 @@ void loop()
     Serial.println("Examples only ESP32"); delay(1000);
 }
 #endif
+=======
+
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
 
 

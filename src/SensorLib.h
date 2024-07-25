@@ -181,6 +181,7 @@ typedef struct __SensorLibPins {
 #define SENSORLIB_COUNT(x)      (sizeof(x)/sizeof(*x))
 
 #ifdef ARDUINO
+<<<<<<< HEAD
 #if !defined(ESP32) || !defined(ARDUINO_ARCH_ESP32)
 #define LOG_FILE_LINE_INFO __FILE__, __LINE__
 #ifndef log_e
@@ -191,6 +192,17 @@ typedef struct __SensorLibPins {
 #endif
 #ifndef log_d
 #define log_d(fmt, ...)     Serial.printf("[D][%s:%d] " fmt "\n", LOG_FILE_LINE_INFO, ##__VA_ARGS__)
+=======
+#ifndef ESP32
+#ifndef log_e
+#define log_e(...)          Serial.printf(__VA_ARGS__)
+#endif
+#ifndef log_i
+#define log_i(...)          Serial.printf(__VA_ARGS__)
+#endif
+#ifndef log_d
+#define log_d(...)          Serial.printf(__VA_ARGS__)
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
 #endif
 #endif
 #elif defined(ESP_PLATFORM)

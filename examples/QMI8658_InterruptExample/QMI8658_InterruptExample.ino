@@ -223,11 +223,15 @@ void readSensorData(const char *name)
             Serial.print(gyr.z);
             Serial.println("}");
         }
+<<<<<<< HEAD
         Serial.print("\t\t\t\t > ");
         Serial.print(qmi.getTimestamp());
         Serial.print("  ");
         Serial.print(qmi.getTemperature_C());
         Serial.println("*C");
+=======
+        Serial.printf("\t\t\t\t > %lu  %.2f *C\n", qmi.getTimestamp(), qmi.getTemperature_C());
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
     }
 
 }

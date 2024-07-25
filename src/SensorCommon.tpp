@@ -70,12 +70,17 @@ public:
 
     bool begin(PLATFORM_WIRE_TYPE &w, uint8_t addr, int sda, int scl)
     {
+<<<<<<< HEAD
         log_i("Using Arduino Wire interface.");
+=======
+        log_i("Using Arduino Wire interface.\n");
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
         if (__has_init)return thisChip().initImpl();
         __wire = &w;
         __sda = sda;
         __scl = scl;
 #if defined(NRF52840_XXAA) || defined(NRF52832_XXAA)
+<<<<<<< HEAD
         if (__sda != 0xFF && __scl != 0xFF) {
             __wire->setPins(__sda, __scl);
         }
@@ -91,6 +96,16 @@ public:
         __wire->begin(__sda, __scl);
 #else
         __wire->begin();
+=======
+        __wire->begin();
+#elif defined(ARDUINO_ARCH_RP2040)
+        __wire->end();
+        __wire->setSDA(__sda);
+        __wire->setSCL(__scl);
+        __wire->begin();
+#else
+        __wire->begin(__sda, __scl);
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
 #endif
         __addr = addr;
         __spi = NULL;
@@ -104,7 +119,11 @@ public:
                PLATFORM_SPI_TYPE &spi = SPI
               )
     {
+<<<<<<< HEAD
         log_i("Using Arduino SPI interface.");
+=======
+        log_i("Using Arduino SPI interface.\n");
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
         if (__has_init)return thisChip().initImpl();
         __cs  = cs;
         __spi = &spi;
@@ -142,7 +161,11 @@ public:
 
     bool begin(i2c_master_bus_handle_t i2c_dev_bus_handle, uint8_t addr)
     {
+<<<<<<< HEAD
         log_i("Using ESP-IDF Driver interface.");
+=======
+        log_i("Using ESP-IDF Driver interface.\n");
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
         if (i2c_dev_bus_handle == NULL) return false;
         if (__has_init)return thisChip().initImpl();
 
@@ -166,6 +189,7 @@ public:
         __i2c_dev_conf.dev_addr_length = I2C_ADDR_BIT_LEN_7;
         __i2c_dev_conf.device_address = __addr;
         __i2c_dev_conf.scl_speed_hz = SENSORLIB_I2C_MASTER_SEEED;
+<<<<<<< HEAD
 #if (ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5,3,0))
 #if (ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5,4,0))
             // New fields since esp-idf-v5.3-beta1
@@ -180,11 +204,25 @@ public:
             return false;
         }
         log_i("Added Device Address : 0x%X  New Dev Address: %p Speed :%lu ", __addr, __i2c_device, __i2c_dev_conf.scl_speed_hz);
+=======
+
+        if (ESP_OK != i2c_master_bus_add_device(bus_handle,
+                                                &__i2c_dev_conf,
+                                                &__i2c_device)) {
+            log_i("i2c_master_bus_add_device failed !\n");
+            return false;
+        }
+        log_i("Added Device Address : 0x%X  New Dev Address: %p Speed :%lu \n", __addr, __i2c_device, __i2c_dev_conf.scl_speed_hz);
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
         __has_init = thisChip().initImpl();
 
         if (!__has_init) {
             // Initialization failed, delete device
+<<<<<<< HEAD
             log_i("i2c_master_bus_rm_device  !");
+=======
+            log_i("i2c_master_bus_rm_device  !\n");
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
             i2c_master_bus_rm_device(__i2c_device);
         }
 
@@ -196,7 +234,11 @@ public:
     bool begin(i2c_port_t port_num, uint8_t addr, int sda, int scl)
     {
         __i2c_num = port_num;
+<<<<<<< HEAD
         log_i("Using ESP-IDF Driver interface.");
+=======
+        log_i("Using ESP-IDF Driver interface.\n");
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
         if (__has_init)return thisChip().initImpl();
         __sda = sda;
         __scl = scl;
@@ -233,7 +275,11 @@ public:
 
     bool begin(uint8_t addr, iic_fptr_t readRegCallback, iic_fptr_t writeRegCallback)
     {
+<<<<<<< HEAD
         log_i("Using Custom interface.");
+=======
+        log_i("Using Custom interface.\n");
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
         if (__has_init)return thisChip().initImpl();
         __i2c_master_read = readRegCallback;
         __i2c_master_write = writeRegCallback;

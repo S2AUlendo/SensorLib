@@ -153,6 +153,7 @@
 #define GT911_POINT_2                 (0X8157)
 #define GT911_POINT_3                 (0X815F)
 #define GT911_POINT_4                 (0X8167)
+<<<<<<< HEAD
 #define GT911_POINT_5                 (0X816F)
 
 
@@ -161,3 +162,6 @@
 #define GT911_GET_HAVE_KEY(x)               (x & 0x10)
 
 
+=======
+#define GT911_POINT_5                 (0X816F)
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)

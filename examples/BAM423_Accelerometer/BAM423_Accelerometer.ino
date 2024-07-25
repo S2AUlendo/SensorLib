@@ -71,7 +71,11 @@ void setup()
 
 void loop()
 {
+<<<<<<< HEAD
     int16_t x = 0, y = 0, z = 0;
+=======
+    int16_t x, y, z;
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
     accel.getAccelerometer(x, y, z);
     Serial.print("X:");
     Serial.print(x); Serial.print(" ");

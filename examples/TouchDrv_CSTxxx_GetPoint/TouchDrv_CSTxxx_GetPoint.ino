@@ -88,6 +88,7 @@ void setup()
     // Search for known CSTxxx device addresses
     uint8_t address = 0xFF;
 
+<<<<<<< HEAD
 #if defined(ARDUINO_ARCH_RP2040)
     Wire.setSCL(SENSOR_SCL);
     Wire.setSDA(SENSOR_SDA);
@@ -95,6 +96,11 @@ void setup()
 #elif defined(NRF52840_XXAA) || defined(NRF52832_XXAA)
     Wire.setPins(SENSOR_SDA, SENSOR_SCL);
     Wire.begin();
+=======
+#ifdef ARDUINO_ARCH_RP2040
+    Wire.setSCL(SENSOR_SCL);
+    Wire.setSDA(SENSOR_SDA);
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
 #else
     Wire.begin(SENSOR_SDA, SENSOR_SCL);
 #endif

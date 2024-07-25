@@ -143,9 +143,15 @@ public:
         writeCommand(0x05);
 
         /*
+<<<<<<< HEAD
         * Depending on the chip and platform, setting it to input after removing sleep will affect power consumption.
         * The chip platform determines whether
         *
+=======
+        * Depending on the chip and platform, setting it to input after removing sleep will affect power consumption. 
+        * The chip platform determines whether
+        * 
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
         * * */
         // if (__irq != SENSOR_PIN_NONE) {
         //     this->setGpioLevel(__irq, INPUT);
@@ -184,6 +190,7 @@ public:
         if (!x_array || !y_array || size == 0)
             return 0;
 
+<<<<<<< HEAD
         uint8_t val = readGT911(GT911_POINT_INFO);
 
         bool haveKey = GT911_GET_HAVE_KEY(val);
@@ -197,6 +204,9 @@ public:
         clearBuffer();
 
         touchPoint = GT911_GET_POINT(val);
+=======
+        touchPoint = getPoint();
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
         if (touchPoint == 0) {
             return 0;
         }
@@ -273,9 +283,15 @@ public:
     uint8_t getPoint()
     {
         // GT911_POINT_INFO 0X814E
+<<<<<<< HEAD
         uint8_t val = readGT911(GT911_POINT_INFO);
         clearBuffer();
         return GT911_GET_POINT(val);
+=======
+        uint8_t val = readGT911(GT911_POINT_INFO) & 0x0F;
+        clearBuffer();
+        return val & 0x0F;
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
     }
 
 
@@ -335,12 +351,15 @@ public:
         SensorCommon::setGpioReadCallback(read_cb);
     }
 
+<<<<<<< HEAD
     void setHomeButtonCallback(home_button_callback_t cb, void *user_data)
     {
         __homeButtonCb = cb;
         __userData = user_data;
     }
 
+=======
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
 private:
 
     uint8_t readGT911(uint16_t cmd)

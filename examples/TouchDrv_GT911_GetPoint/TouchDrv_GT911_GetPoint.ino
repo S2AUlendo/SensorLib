@@ -58,11 +58,20 @@ void setup()
     Serial.begin(115200);
     while (!Serial);
 
+<<<<<<< HEAD
     /*
 
     If the touch reset pin and interrupt pin cannot be controlled by GPIO, the device address cannot be controlled and can only be obtained by scanning.
 
     Wire.begin(SENSOR_SDA, SENSOR_SCL);
+=======
+    Wire.begin(SENSOR_SDA, SENSOR_SCL);
+    /*
+    * The touch reset pin uses hardware pull-up,
+    * and the function of setting the I2C device address cannot be used.
+    * Use scanning to obtain the touch device address.
+    * * */
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
     uint8_t touchAddress = 0;
     Wire.beginTransmission(0x14);
     if (Wire.endTransmission() == 0) {
@@ -78,6 +87,7 @@ void setup()
             delay(1000);
         }
     }
+<<<<<<< HEAD
     touch.setPins(SENSOR_RST, SENSOR_IRQ);
     if (!touch.begin(Wire,  touchAddress, SENSOR_SDA, SENSOR_SCL )) {
         while (1) {
@@ -91,6 +101,12 @@ void setup()
     // If the reset pin and interrupt pin can be controlled by GPIO, the device address can be set arbitrarily
     touch.setPins(SENSOR_RST, SENSOR_IRQ);
     if (!touch.begin(Wire,  GT911_SLAVE_ADDRESS_H, SENSOR_SDA, SENSOR_SCL )) {
+=======
+
+    touch.setPins(SENSOR_RST, SENSOR_IRQ);
+
+    if (!touch.begin(Wire,  touchAddress, SENSOR_SDA, SENSOR_SCL )) {
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
         while (1) {
             Serial.println("Failed to find GT911 - check your wiring!");
             delay(1000);
@@ -102,17 +118,21 @@ void setup()
 
     Serial.println("Init GT911 Sensor success!");
 
+<<<<<<< HEAD
     // Set the center button to trigger the callback , Only for specific devices, e.g LilyGo-EPD47 S3 GT911
     touch.setHomeButtonCallback([](void *user_data) {
         Serial.println("Home button pressed!");
     }, NULL);
 
+=======
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
 }
 
 void loop()
 {
     if (touch.isPressed()) {
         uint8_t touched = touch.getPoint(x, y, touch.getSupportTouchPoint());
+<<<<<<< HEAD
         if (touched > 0) {
             for (int i = 0; i < touched; ++i) {
                 Serial.print("X[");
@@ -128,6 +148,21 @@ void loop()
             }
             Serial.println();
         }
+=======
+        for (int i = 0; i < touched; ++i) {
+            Serial.print("X[");
+            Serial.print(i);
+            Serial.print("]:");
+            Serial.print(x[i]);
+            Serial.print(" ");
+            Serial.print(" Y[");
+            Serial.print(i);
+            Serial.print("]:");
+            Serial.print(y[i]);
+            Serial.print(" ");
+        }
+        Serial.println();
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
     }
     delay(5);
 }

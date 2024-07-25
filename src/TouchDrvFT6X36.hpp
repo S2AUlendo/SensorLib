@@ -379,7 +379,11 @@ private:
 
 
         if (vendId != FT6X36_VEND_ID) {
+<<<<<<< HEAD
             log_e("Vendor id is 0x%X not match!", vendId);
+=======
+            log_e("Vendor id is 0x%X not match!\n", vendId);
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
             return false;
         }
 
@@ -390,6 +394,7 @@ private:
                 (__chipID != FT6236U_CHIP_ID)  &&
                 (__chipID != FT3267_CHIP_ID)
            ) {
+<<<<<<< HEAD
             log_e("Vendor id is not match!");
             log_e("ChipID:0x%lx should be 0x06 or 0x36 or 0x64", __chipID);
             return false;
@@ -400,14 +405,33 @@ private:
         log_i("Firm Version: 0x%X", readRegister(FT6X36_REG_FIRM_VERS));
         log_i("Point Rate Hz: %u", readRegister(FT6X36_REG_PERIOD_ACTIVE));
         log_i("Thresh : %u", readRegister(FT6X36_REG_THRESHOLD));
+=======
+            log_e("Vendor id is not match!\n");
+            log_e("ChipID:0x%lx should be 0x06 or 0x36 or 0x64\n", __chipID);
+            return false;
+        }
+
+        log_i("Vend ID: 0x%X\n", vendId);
+        log_i("Chip ID: 0x%lx\n", __chipID);
+        log_i("Firm Version: 0x%X\n", readRegister(FT6X36_REG_FIRM_VERS));
+        log_i("Point Rate Hz: %u\n", readRegister(FT6X36_REG_PERIOD_ACTIVE));
+        log_i("Thresh : %u\n", readRegister(FT6X36_REG_THRESHOLD));
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
 
         // change threshold to be higher/lower
         writeRegister(FT6X36_REG_THRESHOLD, 60);
 
+<<<<<<< HEAD
         log_i("Chip library version : 0x%x", getLibraryVersion());
 
         // This register describes period of monitor status, it should not less than 30.
         log_i("Chip period of monitor status : 0x%x", readRegister(FT6X36_REG_PERIOD_MONITOR));
+=======
+        log_i("Chip library version : 0x%x\n", getLibraryVersion());
+
+        // This register describes period of monitor status, it should not less than 30.
+        log_i("Chip period of monitor status : 0x%x\n", readRegister(FT6X36_REG_PERIOD_MONITOR));
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
 
         // This register describes the period of active status, it should not less than 12
 

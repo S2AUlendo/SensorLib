@@ -80,11 +80,15 @@ void lockingMechanismHandler()
         Serial.print(gyr.z);
         Serial.println("}");
     }
+<<<<<<< HEAD
     Serial.print("\t\t\t\t > ");
     Serial.print(qmi.getTimestamp());
     Serial.print("  ");
     Serial.print(qmi.getTemperature_C());
     Serial.println("*C");
+=======
+    Serial.printf("\t\t\t\t > %lu  %.2f *C\n", qmi.getTimestamp(), qmi.getTemperature_C());
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
 }
 
 void setup()
@@ -105,7 +109,11 @@ void setup()
 #else
 
 #ifndef CONFIG_IDF_TARGET_ESP32
+<<<<<<< HEAD
 //Use tbeams3 default spi pin
+=======
+//Use tbeams3 defalut spi pin
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
 #define SPI_MOSI                    (35)
 #define SPI_SCK                     (36)
 #define SPI_MISO                    (37)

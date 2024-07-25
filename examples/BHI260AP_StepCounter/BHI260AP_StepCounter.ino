@@ -25,7 +25,11 @@
  * @file      BHI260AP_StepCounter.ino
  * @author    Lewis He (lewishe@outlook.com)
  * @date      2023-10-08
+<<<<<<< HEAD
  * @note      Changed from Boschsensortec API https://github.com/boschsensortec/BHY2_SensorAPI
+=======
+ *
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
  */
 #include <Wire.h>
 #include <SPI.h>
@@ -49,13 +53,21 @@
 SensorBHI260AP bhy;
 
 
+<<<<<<< HEAD
 void step_detector_process_callback(uint8_t  sensor_id, uint8_t *data_ptr, uint32_t len, uint64_t *timestamp)
+=======
+void step_detector_process_callback(uint8_t  sensor_id, uint8_t *data_ptr, uint32_t len)
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
 {
     Serial.print(bhy.getSensorName(sensor_id));
     Serial.println(" detected.");
 }
 
+<<<<<<< HEAD
 void step_counter_process_callback(uint8_t  sensor_id, uint8_t *data_ptr, uint32_t len, uint64_t *timestamp)
+=======
+void step_counter_process_callback(uint8_t  sensor_id, uint8_t *data_ptr, uint32_t len)
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
 {
     Serial.print(bhy.getSensorName(sensor_id));
     Serial.print(":");

@@ -105,7 +105,11 @@ public:
         return initImpl();
     }
 
+<<<<<<< HEAD
     bool init( PLATFORM_SPI_TYPE &spi, int cs, int mosi = -1, int miso = -1, int sck = -1)
+=======
+    bool init( PLATFORM_SPI_TYPE &spi, int cs, int mosi = MOSI, int miso = MISO, int sck = SCK)
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
     {
         __handler.u.spi_dev.cs = cs;
         __handler.u.spi_dev.miso = miso;
@@ -220,7 +224,11 @@ public:
 
     struct bmm150_mag_data getMag()
     {
+<<<<<<< HEAD
         struct bmm150_mag_data data = {0, 0, 0};
+=======
+        struct bmm150_mag_data data = {0};
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
         bmm150_read_mag_data(&data, dev);
         return data;
     }
@@ -239,10 +247,16 @@ public:
 
 private:
 
+<<<<<<< HEAD
     static void  handleISR(/*void *available*/)
     {
         // *(bool *)(available) = true;
         __data_available = true;
+=======
+    static void IRAM_ATTR handleISR(void *available)
+    {
+        *(bool *)(available) = true;
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
     }
 
     bool initImpl()
@@ -307,6 +321,7 @@ private:
         bmm150_get_sensor_settings(&settings, dev);
 
         if (__handler.irq != SENSOR_PIN_NONE) {
+<<<<<<< HEAD
             /*
             #if defined(ARDUINO_ARCH_RP2040)
                         attachInterruptParam((pin_size_t)(__handler.irq), handleISR, (PinStatus )RISING, (void *)&__data_available);
@@ -320,6 +335,12 @@ private:
             attachInterrupt(__handler.irq, handleISR, RISING);
 #else
 #error "Interrupt registration not implemented"
+=======
+#if defined(ARDUINO_ARCH_RP2040)
+            attachInterruptParam((pin_size_t)(__handler.irq), handleISR, (PinStatus )RISING, (void *)&__data_available);
+#else
+            attachInterruptArg(__handler.irq, handleISR, (void *)&__data_available, RISING);
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
 #endif
         }
 
@@ -331,7 +352,11 @@ protected:
     struct bmm150_dev *dev = NULL;
     SensorLibConfigure __handler;
     int8_t           __error_code;
+<<<<<<< HEAD
     static volatile bool    __data_available;
+=======
+    volatile bool    __data_available;
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
 };
 
 

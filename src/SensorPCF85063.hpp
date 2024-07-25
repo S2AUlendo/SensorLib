@@ -41,6 +41,7 @@ class SensorPCF85063 :
     friend class RTCCommon<SensorPCF85063>;
 public:
 
+<<<<<<< HEAD
     enum ClockHz {
         CLK_32768HZ = 0,
         CLK_16384HZ,
@@ -50,6 +51,13 @@ public:
         CLK_1024HZ,
         CLK_1HZ,
         CLK_LOW,
+=======
+    enum {
+        CLK_32_768KHZ,
+        CLK_1024KHZ,
+        CLK_32HZ,
+        CLK_1HZ,
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
     };
 
 
@@ -340,6 +348,7 @@ public:
                  week);
     }
 
+<<<<<<< HEAD
     void setClockOutput(ClockHz hz)
     {
         int val = readRegister(PCF85063_CTRL2_REG);
@@ -349,6 +358,8 @@ public:
         writeRegister(PCF85063_CTRL2_REG, val);
     }
 
+=======
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
 private:
 
     bool initImpl()
@@ -372,7 +383,11 @@ private:
             clrRegisterBit(PCF85063_CTRL1_REG, 1);
         }
 
+<<<<<<< HEAD
         //Turn on RTC
+=======
+        //Trun on RTC
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
         start();
 
         return isRunning();

@@ -31,7 +31,10 @@
 
 #include "SensorLib.h"
 
+<<<<<<< HEAD
 #if defined(ARDUINO)
+=======
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
 class SensorInterfaces
 {
 public:
@@ -47,7 +50,11 @@ private:
     static SPISettings  __spiSetting;
 };
 
+<<<<<<< HEAD
 #endif
+=======
+
+>>>>>>> a3fcd92 (fix QMI8658 read FIFO value casting bug and add new functions)
 
 
 
